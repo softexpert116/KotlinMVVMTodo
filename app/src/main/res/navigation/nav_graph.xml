@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  app:startDestination="@id/mainTodoFragment">
+
+  <fragment
+    android:id="@+id/mainTodoFragment"
+    android:name="com.example.test.view.fragments.MainTodoFragment"
+    android:label="@string/app_name"
+    tools:layout="@layout/fragment_main_todo">
+    <action
+      android:id="@+id/actionMainTodoClicked"
+      app:destination="@id/subTodoFragment"
+      app:enterAnim="@anim/fade_in"
+      app:exitAnim="@anim/fade_out"
+      app:popEnterAnim="@anim/slide_in_left"
+      app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/actionCreateTodoFragment"
+        app:destination="@id/createTodoFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/subTodoFragment"
+    android:name="com.example.test.view.fragments.SubTodoFragment"
+    android:label="@string/app_name"
+    tools:layout="@layout/fragment_sub_todo">
+    <action
+        android:id="@+id/actionCreateSubTodoFragment"
+        app:destination="@id/createSubTodoFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+  </fragment>
+  <fragment
+      android:id="@+id/createTodoFragment"
+      android:name="com.example.test.view.fragments.CreateTodoFragment"
+      android:label="@string/app_name"
+      tools:layout="@layout/fragment_create_todo">
+  </fragment>
+  <fragment
+      android:id="@+id/createSubTodoFragment"
+      android:name="com.example.test.view.fragments.CreateSubTodoFragment"
+      android:label="@string/app_name"
+      tools:layout="@layout/fragment_create_sub_todo">
+  </fragment>
+</navigation>

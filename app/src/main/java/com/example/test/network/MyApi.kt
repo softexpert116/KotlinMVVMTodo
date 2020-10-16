@@ -1,5 +1,6 @@
 package com.example.test.network
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
@@ -77,6 +78,7 @@ interface MyApi {
             return Retrofit.Builder()
                 .baseUrl("https://todos.flexhire.com/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
                 .create(MyApi::class.java)
         }

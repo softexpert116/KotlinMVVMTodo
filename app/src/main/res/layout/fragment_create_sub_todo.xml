@@ -15,16 +15,37 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="16dp"
-        tools:context=".view.CreateTodoActivity">
+        tools:context=".view.fragments.CreateSubTodoFragment">
 
         <EditText
-            android:text="@={viewmodel.mainTodo.title}"
+            android:text="@={viewmodel.subTodo.name}"
             android:id="@+id/editText1"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:hint="Todo Title"/>
+            android:hint="Name"/>
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText1"
+            >
+            <RadioButton
+                android:checked="@={viewmodel.subTodo.done}"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Done"
+                />
+            <RadioButton
+                android:checked="@={!viewmodel.subTodo.done}"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Undone"
+                />
+        </RadioGroup>
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -35,12 +56,12 @@
             android:layout_height="wrap_content"/>
 
         <Button
-            android:onClick="@{viewmodel::onCreateTodoButtonClick}"
+            android:onClick="@{viewmodel::onCreateSubTodoButtonClick}"
             android:id="@+id/btn_create"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editText1"
+            android:layout_below="@+id/radioGroup"
             android:text="Create"/>
     </RelativeLayout>
 

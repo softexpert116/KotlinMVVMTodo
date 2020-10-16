@@ -1,33 +1,30 @@
-package com.example.test.ui.view
+package com.example.test.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.test.R
-import com.example.test.databinding.ActivitySignupBinding
 import com.example.test.model.TodoResponse
+import com.example.test.ui.view.ServerListener
 import com.example.test.util.hide
 import com.example.test.util.myToast
 import com.example.test.util.show
+import com.example.test.view.MainActivity
 import com.example.test.viewmodel.AuthViewModel
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_auth.*
 import org.json.JSONObject
 
-class SignupActivity : AppCompatActivity(), ServerListener {
+class AuthActivity : AppCompatActivity(), ServerListener {
+    lateinit var viewModel:AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivitySignupBinding = DataBindingUtil.setContentView(this,R.layout.activity_signup)
-        var viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
-        binding.viewmodel = viewModel
+        setContentView(R.layout.activity_auth)
+        viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
         viewModel.serverListener = this
-
-        btn_login.setOnClickListener() {
-            finish()
-        }
     }
 
     override fun onStarted()
@@ -50,7 +47,10 @@ class SignupActivity : AppCompatActivity(), ServerListener {
             }
             if (jsonObject.has("auth_token")) {
                 auth_token = jsonObject.optString("auth_token")
-//                myToast(auth_token)
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("auth_token", auth_token)
+                startActivity(intent)
+                finish()
             }
         })
     }
@@ -64,5 +64,7 @@ class SignupActivity : AppCompatActivity(), ServerListener {
         progressBar.hide()
         myToast(message)
     }
+
+
 
 }

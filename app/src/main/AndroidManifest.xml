@@ -14,15 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.CreateSubTodoActivity"></activity>
-        <activity android:name=".view.ItemActivity"></activity>
-        <activity android:name=".view.CreateTodoActivity" />
         <activity android:name=".view.MainActivity" />
         <activity
-            android:name=".ui.view.SignupActivity"
-            android:theme="@style/LoginTheme" />
-        <activity
-            android:name=".ui.view.LoginActivity"
+            android:name=".view.AuthActivity"
             android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

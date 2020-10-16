@@ -25,7 +25,7 @@ class TodoViewModel : ViewModel(){
         else
         {
             todoListLiveData = TodoRepository().todoListGet(auth_token!!)
-            val success:MutableLiveData<String> = MutableLiveData("Loading..")
+            val success:MutableLiveData<String> = MutableLiveData("Updating..")
             serverListener?.onSuccess(success)
             return todoListLiveData
         }

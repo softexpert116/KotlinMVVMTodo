@@ -34,19 +34,13 @@
 
 package com.example.test
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.ContextWrapper
-import android.widget.ProgressBar
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.observe
-import com.example.test.model.MainTodo
-import com.example.test.util.hide
-import com.example.test.view.adapter.MainTodoAdapter
-import com.example.test.viewmodel.TodoViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class App : Application() {
 
@@ -54,7 +48,14 @@ class App : Application() {
     @get:Synchronized
     lateinit var application: App
 
-
+    fun hideKeyboard(activity: Activity) {
+      val view = activity.currentFocus
+      if (view != null) {
+        val imm = activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+      }
+      activity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
 
     fun Context.lifecycleOwner(): LifecycleOwner? {
       var curContext = this

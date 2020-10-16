@@ -39,20 +39,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.ViewUtils
-import androidx.lifecycle.Observer
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.observe
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test.R
 import com.example.test.model.MainTodo
-import com.example.test.ui.view.ServerListener
-import com.example.test.util.myToast
+import com.example.test.view.MainActivity
+import com.example.test.view.fragments.MainTodoFragment
 import com.example.test.viewmodel.TodoViewModel
 import kotlinx.android.synthetic.main.item_maintodo.view.*
 
 class MainTodoAdapter(
-  private val context: Context, private val mainTodoClickListener: MainTodoClickListener, private val viewModel: TodoViewModel) :
+  private val context: Context,
+  private val fragment: MainTodoFragment,
+  private val mainTodoClickListener: MainTodoClickListener,
+  private val viewModel: TodoViewModel
+) :
     RecyclerView.Adapter<MainTodoAdapter.MainTodoViewHolder>() {
 
   private var data = mutableListOf<MainTodo?>()
@@ -95,6 +96,11 @@ class MainTodoAdapter(
           .setPositiveButton("Yes") { dialog, id ->
             viewModel.mainTodo = mainTodo
             viewModel.todoDelete()
+//            var activity = context as MainActivity
+//            val fragmentTransaction: FragmentTransaction = activity.getFragmentManager().beginTransaction()
+//            fragmentTransaction.detach(fragment)
+//            fragmentTransaction.attach(fragment)
+//            fragmentTransaction.commit()
             dialog.dismiss()
           }
           .setNegativeButton("No") { dialog, id ->
@@ -109,9 +115,9 @@ class MainTodoAdapter(
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainTodoViewHolder {
     val itemView = LayoutInflater.from(parent.context).inflate(
-        R.layout.item_maintodo,
-        parent,
-        false
+      R.layout.item_maintodo,
+      parent,
+      false
     )
 
     return MainTodoViewHolder(itemView)

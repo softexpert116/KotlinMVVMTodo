@@ -7,7 +7,7 @@ import com.example.test.model.User
 import com.example.test.ui.view.ServerListener
 
 class AuthViewModel : ViewModel(){
-    var user = User("tester1", "tester1@email.com", "tester1", "tester1", "")
+    var user = User("tester2", "tester2@email.com", "tester2", "tester2", "")
     var serverListener: ServerListener? = null
     fun onLoginButtonClick(view: View)
     {
